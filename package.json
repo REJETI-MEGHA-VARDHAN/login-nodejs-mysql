@@ -1,0 +1,29 @@
+{
+  "name": "node-mysql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bootstrap": "^4.5.3",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "dotnet": "^1.1.4",
+    "email-validator": "^2.0.4",
+    "email-verifier": "^0.4.1",
+    "email-verifier-node": "0.0.2",
+    "express": "^4.17.1",
+    "hbs": "^4.1.1",
+    "jquery": "^3.5.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1",
+    "nodemailer": "^6.4.16",
+    "nodemon": "^2.0.6"
+  }
+}
