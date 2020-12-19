@@ -41,8 +41,8 @@ db.query("CREATE TABLE IF NOT EXISTS users ( id int NOT NULL AUTO_INCREMENT, nam
 });
 app.use('/',require('./routes/pages'));
 app.use('/auth',require('./routes/auth'));
-
-app.listen(5000,()=>{
+const PORT= process.env.PORT || 3000;
+app.listen(PORT,()=>{
     console.log("listening");
 
 });
