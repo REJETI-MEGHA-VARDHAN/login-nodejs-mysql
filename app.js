@@ -25,13 +25,13 @@ db.connect((error)=>{
     console.log(error);
     else
     {
-        db.query("CREATE DATABASE IF NOT EXISTS mydb",(err,results)=>{
+        db.query("CREATE DATABASE IF NOT EXISTS sql12383090",(err,results)=>{
             if(err)
             console.log(err);
         });
     }
 });
-db.query("USE mydb",(err,results)=>{
+db.query("USE sql12383090",(err,results)=>{
     if(err)
     console.log(err);
 });
