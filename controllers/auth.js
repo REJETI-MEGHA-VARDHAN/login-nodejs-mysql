@@ -47,7 +47,7 @@ exports.login=async (req,res)=>{
             }
             res.cockie('jwt',token,cookieOptions);
             res.status(200).redirect("/")*/
-            return res.status(200).render('login',{message : 'Hi' +results[0].name + 'You have been successfully logged in'});
+            return res.status(200).render('login',{message : 'Hi, ' +results[0].name + ' You have been successfully logged in'});
         }
 
     });
