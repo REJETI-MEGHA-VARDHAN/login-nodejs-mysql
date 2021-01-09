@@ -47,7 +47,7 @@ exports.login=async (req,res)=>{
             }
             res.cockie('jwt',token,cookieOptions);
             res.status(200).redirect("/")*/
-            return res.status(2xx).render('login',{message : 'Hi' +results[0].name + 'You have been successfully logged in'});
+            return res.status(200).render('login',{message : 'Hi' +results[0].name + 'You have been successfully logged in'});
         }
 
     });
@@ -122,7 +122,7 @@ exports.resetpassword=async (req,res)=>{
                         console.log(error);
                     }
                     else{
-                        return res.status(2xx).render('resetpassword',{message: 'Password Successfully Updated'});
+                        return res.status(200).render('resetpassword',{message: 'Password Successfully Updated'});
                     }
                 });
             }
@@ -157,7 +157,7 @@ exports.validate =async (req,res)=>{
                     console.log(error);
                 }
                 else{
-                    return res.status(2xx).render('validate',{message: 'The User is Registered'}); 
+                    return res.status(200).render('validate',{message: 'The User is Registered'}); 
                 }
                 });
     }
