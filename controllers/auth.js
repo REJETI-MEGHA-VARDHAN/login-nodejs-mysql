@@ -47,7 +47,7 @@ exports.login=async (req,res)=>{
             }
             res.cockie('jwt',token,cookieOptions);
             res.status(200).redirect("/")*/
-            return res.status(210).render('login',{message : 'Hi' +results[0].name + 'You have been successfully logged in'});
+            return res.status(2xx).render('login',{message : 'Hi' +results[0].name + 'You have been successfully logged in'});
         }
 
     });
@@ -62,7 +62,7 @@ exports.forgotpassword =async (req,res)=>{
         }
         else{
         if((results.length)==0){
-            return res.render('forgotpassword',{message: 'You havenot Registered yet'});
+            return res.status(400).render('forgotpassword',{message: 'You havenot Registered yet'});
         }
         }
     });
@@ -97,14 +97,14 @@ exports.forgotpassword =async (req,res)=>{
     }
     else
     {
-        return res.status(210).render('forgotpassword',{message : 'Invalid Email'});
+        return res.status(400).render('forgotpassword',{message : 'Invalid Email'});
     }
 }
 
 exports.resetpassword=async (req,res)=>{
     const { password,passwordCheck }=req.body;
     if(!password||!passwordCheck)
-    return res.render('resetpassword',{message: 'Please fill the details'});
+    return res.status(400).render('resetpassword',{message: 'Please fill the details'});
     if(password==passwordCheck)
     {
         db.query("SELECT email FROM users WHERE email =?", [d],async(error,results)=>{
@@ -113,7 +113,7 @@ exports.resetpassword=async (req,res)=>{
             }
             else{
             if((results.length)==0){
-                return res.render('resetpassword',{message: 'You havenot Registered yet'});
+                return res.status(400).render('resetpassword',{message: 'You havenot Registered yet'});
             }else{
                 let hashedPassword=await bcrypt.hash(password,8);
             
@@ -122,7 +122,7 @@ exports.resetpassword=async (req,res)=>{
                         console.log(error);
                     }
                     else{
-                        return res.render('resetpassword',{message: 'Password Successfully Updated'});
+                        return res.status(2xx).render('resetpassword',{message: 'Password Successfully Updated'});
                     }
                 });
             }
@@ -131,7 +131,7 @@ exports.resetpassword=async (req,res)=>{
     }
     else
     {
-        return res.status(210).render('resetpassword',{message : 'Password and Confirm Password are not matched'});
+        return res.status(400).render('resetpassword',{message : 'Password and Confirm Password are not matched'});
     }
 }
 
@@ -143,7 +143,7 @@ exports.validationforresetpassword =async (req,res)=>{
     }
     else
     {
-        return res.render('validationforresetpassword',{message: 'OTP is wrong'});
+        return res.status(400).render('validationforresetpassword',{message: 'OTP is wrong'});
     }
 }
 exports.validate =async (req,res)=>{
@@ -157,13 +157,13 @@ exports.validate =async (req,res)=>{
                     console.log(error);
                 }
                 else{
-                    return res.render('validate',{message: 'The User is Registered'}); 
+                    return res.status(2xx).render('validate',{message: 'The User is Registered'}); 
                 }
                 });
     }
     else
     {
-        return res.render('validate',{message: 'OTP is wrong'});
+        return res.status(400).render('validate',{message: 'OTP is wrong'});
     }
 }
 
@@ -179,9 +179,9 @@ exports.register =function(req,res){
         }
         else{
         if((results.length)>0){
-            return res.render('register',{message: 'The email have been already taken'});
+            return res.status(400).render('register',{message: 'The email have been already taken'});
         }else if(password!==passwordCheck){
-            return res.render('register',{message: 'Passwords didnot match'});
+            return res.status(400).render('register',{message: 'Passwords didnot match'});
         }
         else {
 
