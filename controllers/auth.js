@@ -21,7 +21,7 @@ var STRINGOTP;
 exports.login=async (req,res)=>{
         const {email,password}=req.body;
         if(!email||!password){
-            return res.status(400).render('login',{
+            return res.render('login',{
                 message : 'Please enter email and Password' 
             })
         }
@@ -31,23 +31,10 @@ exports.login=async (req,res)=>{
         {console.log(error);}
         if(results.length==0||((results.length>0)&&(!(await bcrypt.compare(password,results[0].password)))))
         {
-            return res.status(400).render('login',{message: 'Incorrect Email or Password'});
+            return res.render('login',{message: 'Incorrect Email or Password'});
         }
         else{
-            /*const id=results[0].id;
-            const token=jwt.sign({ id }, process.eventNames.JWT_SECRET,{
-                expiresIn:processenv.JWT_EXPIRE_IN
-
-            });
-            const cockieOptions={
-                expires:new Date(
-                    Date.now()+process.env.JWT_COOKIE_EXPIRES*24*60*60*1000
-                ),
-                httponly: true,
-            }
-            res.cockie('jwt',token,cookieOptions);
-            res.status(200).redirect("/")*/
-            return res.status(200).render('login',{message : 'Hi, ' +results[0].name + ' You have been successfully logged in'});
+            return res.render('success',{message : 'Hi, ' +results[0].name + ' You have been successfully logged in'});
         }
 
     });
@@ -62,7 +49,7 @@ exports.forgotpassword =async (req,res)=>{
         }
         else{
         if((results.length)==0){
-            return res.status(400).render('forgotpassword',{message: 'You havenot Registered yet'});
+            return res.render('forgotpassword',{message: 'You havenot Registered yet'});
         }
         }
     });
@@ -97,14 +84,14 @@ exports.forgotpassword =async (req,res)=>{
     }
     else
     {
-        return res.status(400).render('forgotpassword',{message : 'Invalid Email'});
+        return res.render('forgotpassword',{message : 'Invalid Email'});
     }
 }
 
 exports.resetpassword=async (req,res)=>{
     const { password,passwordCheck }=req.body;
     if(!password||!passwordCheck)
-    return res.status(400).render('resetpassword',{message: 'Please fill the details'});
+    return res.render('resetpassword',{message: 'Please fill the details'});
     if(password==passwordCheck)
     {
         db.query("SELECT email FROM users WHERE email =?", [d],async(error,results)=>{
@@ -113,7 +100,7 @@ exports.resetpassword=async (req,res)=>{
             }
             else{
             if((results.length)==0){
-                return res.status(400).render('resetpassword',{message: 'You havenot Registered yet'});
+                return res.render('resetpassword',{message: 'You havenot Registered yet'});
             }else{
                 let hashedPassword=await bcrypt.hash(password,8);
             
@@ -122,7 +109,7 @@ exports.resetpassword=async (req,res)=>{
                         console.log(error);
                     }
                     else{
-                        return res.status(200).render('resetpassword',{message: 'Password Successfully Updated'});
+                        return res.render('success',{message: 'Password Successfully Updated'});
                     }
                 });
             }
@@ -131,7 +118,7 @@ exports.resetpassword=async (req,res)=>{
     }
     else
     {
-        return res.status(400).render('resetpassword',{message : 'Password and Confirm Password are not matched'});
+        return res.render('resetpassword',{message : 'Password and Confirm Password are not matched'});
     }
 }
 
@@ -143,7 +130,7 @@ exports.validationforresetpassword =async (req,res)=>{
     }
     else
     {
-        return res.status(400).render('validationforresetpassword',{message: 'OTP is wrong'});
+        return res.render('validationforresetpassword',{message: 'OTP is wrong'});
     }
 }
 exports.validate =async (req,res)=>{
@@ -157,13 +144,13 @@ exports.validate =async (req,res)=>{
                     console.log(error);
                 }
                 else{
-                    return res.status(200).render('validate',{message: 'The User is Registered'}); 
+                    return res.render('success',{message: 'You are registered .Now you can login with your credentials'}); 
                 }
                 });
     }
     else
     {
-        return res.status(400).render('validate',{message: 'OTP is wrong'});
+        return res.render('validate',{message: 'OTP is wrong'});
     }
 }
 
@@ -179,9 +166,9 @@ exports.register =function(req,res){
         }
         else{
         if((results.length)>0){
-            return res.status(400).render('register',{message: 'The email have been already taken'});
+            return res.render('register',{message: 'The email have been already taken'});
         }else if(password!==passwordCheck){
-            return res.status(400).render('register',{message: 'Passwords didnot match'});
+            return res.render('register',{message: 'Passwords didnot match'});
         }
         else {
 
@@ -219,7 +206,7 @@ exports.register =function(req,res){
             }
             else
             {
-                return res.status(400).render('register',{message: 'Invalid Email'});
+                return res.render('register',{message: 'Invalid Email'});
             }
         }
 
