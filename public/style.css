@@ -31,3 +31,11 @@ nav li a{
 nav li a:hover{
     color:red;
 }
+
+.cent{
+    position:absolute;
+    left:50%;
+    top:50%;
+    -webkit-transform:translate(-50%, -50%);
+    transform:translate(-50%,-50%);
+}
