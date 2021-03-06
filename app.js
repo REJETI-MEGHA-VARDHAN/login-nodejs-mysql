@@ -25,7 +25,7 @@ db.connect((error)=>{
     console.log(error);
     else
     {
-        db.query("CREATE DATABASE IF NOT EXISTS sql12385929",(err,results)=>{
+        db.query("CREATE DATABASE IF NOT EXISTS sql6397053",(err,results)=>{
             if(err)
             console.log(err);
         });
