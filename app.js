@@ -23,15 +23,8 @@ app.set("view engine","hbs");
 db.connect((error)=>{
     if(error)
     console.log(error);
-    else
-    {
-        db.query("CREATE DATABASE IF NOT EXISTS sql6397053",(err,results)=>{
-            if(err)
-            console.log(err);
-        });
-    }
 });
-db.query("USE sql12385929",(err,results)=>{
+db.query("USE sql6397053",(err,results)=>{
     if(err)
     console.log(err);
 });
