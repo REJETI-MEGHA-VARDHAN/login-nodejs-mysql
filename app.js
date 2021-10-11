@@ -24,7 +24,7 @@ db.connect((error)=>{
     if(error)
     console.log(error);
 });
-db.query("USE sql6411363",(err,results)=>{
+db.query("USE "+process.env.DATABASE,(err,results)=>{
     if(err)
     console.log(err);
 });
